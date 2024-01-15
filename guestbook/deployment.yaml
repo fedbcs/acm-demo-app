@@ -19,6 +19,7 @@ spec:
         configMap:
           name: change-port-config
       containers:
+      - name: php-redis
         volumeMounts:
         - name: config-volume
           mountPath: /etc/apache2/sites-available/000-default.conf
@@ -26,7 +27,6 @@ spec:
         - name: config-volume
           mountPath: /etc/apache2/ports.conf
           subPath: ports.conf
-      - name: php-redis
         image: registry.fedins.com/e411bcsl/gb-frontend:v5
         resources:
           requests:
