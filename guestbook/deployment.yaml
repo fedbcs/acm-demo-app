@@ -14,7 +14,18 @@ spec:
         app: guestbook
         tier: frontend
     spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: change-port-config
       containers:
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/apache2/sites-available/000-default.conf
+          subPath: 000-default.conf
+        - name: config-volume
+          mountPath: /etc/apache2/ports.conf
+          subPath: ports.conf
       - name: php-redis
         image: registry.fedins.com/e411bcsl/gb-frontend:v5
         resources:
